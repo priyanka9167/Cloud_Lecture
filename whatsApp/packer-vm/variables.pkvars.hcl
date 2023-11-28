@@ -1,5 +1,4 @@
-aws_access_key = "AKIAXCGZ6BD34BETIBWS"
-aws_secret_key = "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"
+
 source_ami = "ami-058bd2d568351da34"
 ssh_username = "admin"
 ami_name = "Debain-12"
