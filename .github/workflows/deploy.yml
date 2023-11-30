@@ -32,8 +32,11 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
+      - name: Change directory to project
+        run: cd whatsApp
+
       - name: Build with Gradle
-        run: ../whatsApp/gradlew build
+        run: ./gradlew build
 
       - name: create and configure
         run: |
