@@ -33,7 +33,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build with Gradle
-        run: ./home/runner/work/Cloud_Lecture/Cloud_Lecture/whatsApp/gradlew build
+        run: ./Cloud_Lecture/whatsApp/gradlew build
 
       - name: create and configure
         run: |
