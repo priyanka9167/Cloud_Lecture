@@ -33,7 +33,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build with Gradle
-        run: ls
+        run: whatsApp/gradlew build
 
       - name: create and configure
         run: |
