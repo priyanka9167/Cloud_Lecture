@@ -39,7 +39,7 @@ jobs:
         run: pwd
 
       - name: Set execute permissions for Gradle wrapper
-        run: chmod +x /whatsApp/gradlew
+        run: chmod +x ./whatsApp/gradlew
 
       - name: Build with Gradle
         run: ./gradlew build
