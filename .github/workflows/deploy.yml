@@ -31,7 +31,8 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-
+      - name: Print Current Directory before cd
+        run: pwd
       - name: Change directory to project
         run: cd whatsApp
 
