@@ -42,7 +42,7 @@ jobs:
         run: chmod +x ./whatsApp/gradlew
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./whatsApp/gradlew build
 
 
 
