@@ -31,18 +31,16 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name: Print Current Directory before cd
-        run: pwd
+      
+      - name: Change directory to project
+        run: cd Cloud_Lecture/whatsApp
       
 
-      - name: Print Current Directory
-        run: pwd
-
       - name: Set execute permissions for Gradle wrapper
-        run: chmod +x ./whatsApp/gradlew
+        run: chmod +x ./gradlew
 
       - name: Build with Gradle
-        run: ./whatsApp/gradlew build
+        run: ./gradlew build
 
 
 
