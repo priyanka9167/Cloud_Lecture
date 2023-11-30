@@ -31,18 +31,9 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      
-      - name: Change directory to project
-        run: cd Cloud_Lecture/whatsApp
-      
-
-      - name: Set execute permissions for Gradle wrapper
-        run: chmod +x ./gradlew
 
       - name: Build with Gradle
-        run: ./gradlew build
-
-
+        run: ./whatsApp/gradlew build
 
       - name: create and configure
         run: |
