@@ -33,14 +33,13 @@ jobs:
           distribution: 'adopt'
       - name: Print Current Directory before cd
         run: pwd
-      - name: Change directory to project
-        run: cd whatsApp
+      
 
       - name: Print Current Directory
         run: pwd
 
       - name: Set execute permissions for Gradle wrapper
-        run: chmod +x ./gradlew
+        run: chmod +x /whatsApp/gradlew
 
       - name: Build with Gradle
         run: ./gradlew build
