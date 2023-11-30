@@ -3,7 +3,7 @@ name: "Integration test (POSTGRES)"
 on:
   push:
 jobs:
-  intergration:
+  integration:
     runs-on: ubuntu-latest
 
     services:
