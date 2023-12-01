@@ -41,6 +41,10 @@ bootJar {
 	}
 }
 
+application {
+    mainClassName = 'com.example.whatsApp.main.WhatappMain'
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
