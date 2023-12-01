@@ -33,8 +33,8 @@ jobs:
           distribution: 'adopt'
 
       - name: Build with Gradle
-        working-directory: ./whatsApp
-        run: ./gradlew build
+        working-directory: /whatsApp
+        run: gradlew build
 
       - name: create and configure
         run: |
