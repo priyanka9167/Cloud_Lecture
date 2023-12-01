@@ -47,11 +47,12 @@ jobs:
 
       - name: Echo variables
         run: |
-          echo db_host = ${{ secrets.HOST }}
-          echo db_port = ${{ secrets.PORT }}
-          echo db_name = ${{ secrets.DATABASE }}
-          echo db_username = ${{ secrets.USER }}
-          echo db_password = ${{ secrets.PD }}
+          echo "Setting environment variables..."
+          echo "::set-env name=db_host::${{ secrets.HOST }}"
+          echo "::set-env name=db_port::${{ secrets.PORT }}"
+          echo "::set-env name=db_name::${{ secrets.DATABASE }}"
+          echo "::set-env name=db_username::${{ secrets.USER }}"
+          echo "::set-env name=db_password::${{ secrets.PD }}"
 
       - name: Build with Gradle
         working-directory: ./whatsApp
