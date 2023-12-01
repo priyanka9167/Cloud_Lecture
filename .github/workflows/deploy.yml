@@ -47,11 +47,11 @@ jobs:
 
       - name: Echo variables
         run: |
-          echo db_host
-          echo db_port
-          echo db_name
-          echo db_username
-          echo db_password 
+          echo db_host = ${{ secrets.HOST }}
+          echo db_port = ${{ secrets.PORT }}
+          echo db_name = ${{ secrets.DATABASE }}
+          echo db_username = ${{ secrets.USER }}
+          echo db_password = ${{ secrets.PD }}
 
       - name: Build with Gradle
         working-directory: ./whatsApp
