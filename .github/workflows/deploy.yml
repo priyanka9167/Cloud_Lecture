@@ -32,9 +32,11 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: Build with Gradle
+      - name: Change work directory
         working-directory: ./whatsApp
-        run: pwd
+        run: pwd     
+
+      - name: Build with Gradle
         run: ./gradlew build
 
       - name: create and configure
