@@ -37,6 +37,7 @@ jobs:
         run: chmod +x ./gradlew 
 
       - name: Print Gradle Version
+        working-directory: ./whatsApp
         run: ./gradlew --version        
 
       - name: Build with Gradle
