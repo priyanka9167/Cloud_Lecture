@@ -14,6 +14,11 @@ jobs:
           POSTGRES_DB: ${{ secrets.DATABASE }}
           POSTGRES_PASSWORD: ${{ secrets.PD }}
           POSTGRES_ROOT_HOST: ${{ secrets.ROOT_HOST }}
+          db_host: ${{ secrets.HOST }}
+          db_port: ${{ secrets.PORT }}
+          db_name: ${{ secrets.DATABASE }}
+          db_username: ${{ secrets.USER }}
+          db_password: ${{ secrets.PD }}
         ports:
           - 5432:5432
         options: >-
@@ -38,19 +43,13 @@ jobs:
 
       - name: Print Gradle Version
         working-directory: ./whatsApp
-        run: ./gradlew --version        
+        run: ./gradlew --version 
 
       - name: Build with Gradle
         working-directory: ./whatsApp
         run: ./gradlew build
 
-      - name: create and configure
-        run: |
-          touch .env
-          echo "db_port=${{ secrets.PORT }}" >> .env
-          echo "db_username=${{ secrets.USER }}" >> .env
-          echo "db_password=${{ secrets.PD }}" >> .env
-          echo "db_name"=${{ secrets.DATABASE }} >> .env
+      
 
           
 
