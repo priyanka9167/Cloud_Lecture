@@ -34,7 +34,8 @@ jobs:
 
       - name: Build with Gradle
         working-directory: ./whatsApp
-        run: gradlew build
+        run: pwd
+        run: ./gradlew build
 
       - name: create and configure
         run: |
