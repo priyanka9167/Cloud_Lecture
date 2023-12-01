@@ -34,9 +34,10 @@ jobs:
 
       - name: Change work directory
         working-directory: ./whatsApp
-        run: pwd     
+        run: chmod +x ./gradlew     
 
       - name: Build with Gradle
+        working-directory: ./whatsApp
         run: ./gradlew build
 
       - name: create and configure
