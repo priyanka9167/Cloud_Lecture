@@ -55,7 +55,7 @@ jobs:
 
       - name: Build with Gradle
         working-directory: ./whatsApp
-        run: ./gradlew bootrun
+        run: ./gradlew build
 
       
 
