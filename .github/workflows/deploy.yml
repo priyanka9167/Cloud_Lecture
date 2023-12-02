@@ -54,13 +54,7 @@ jobs:
         working-directory: ./whatsApp
         run: ./gradlew build
 
-      - name: Build Jar file
-        working-directory: ./whatsApp
-        run: build-jar 
-      
-      - name: Set Permissions for JAR file
-        working-directory: ./whatsApp/build/libs
-        run: chmod +x demo-0.0.1-SNAPSHOT.jar  
+       
 
       - name: Save Jar file
         uses: actions/upload-artifact@v3
