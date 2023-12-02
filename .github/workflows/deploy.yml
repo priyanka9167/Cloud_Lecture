@@ -24,11 +24,7 @@ jobs:
           --health-retries 5
 
     steps:
-      - name: Check PostgreSQL Connection
-        run: |
-          # Add your commands to check the connection or perform tests against PostgreSQL
-          # For example:
-          psql -h localhost -U $db_username -d $db_name -c 'SELECT version();'
+     
 
       - name: Checkout code
         uses: actions/checkout@v2
@@ -37,19 +33,33 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
-          distribution: 'adopt'
+          distribution: 'temurin'
 
-      - name: Change work directory
+      - name: Setup config
         working-directory: ./whatsApp
-        run: chmod +x ./gradlew 
-
-      - name: Print Gradle Version
-        working-directory: ./whatsApp
-        run: ./gradlew --version
+        run: |
+          mkdir config
+          echo 'spring.datasource.url=jdbc:postgresql://postgres:5432/chatapplication' > config/application.properties    
 
       - name: Build with Gradle
         working-directory: ./whatsApp
         run: ./gradlew build
+
+      - name: Update dependency graph
+        uses: snyk/actions/gradle
+        working-directory: ./whatsApp
+        with:
+          target-file: build.gradle 
+
+      - name: Build Jar file
+        working-directory: ./whatsApp
+        run:  build-jar 
+
+      - name: Save Jar file
+        uses: actions/upload-artifact@v3
+        with:
+          name: demo-0.0.1-SNAPSHOT
+          path: ./whatsApp/build/libs/demo-0.0.1-SNAPSHOT.jar        
 
       
 
