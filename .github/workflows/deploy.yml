@@ -39,17 +39,13 @@ jobs:
         working-directory: ./whatsApp
         run: |
           mkdir config
-
           echo 'spring.datasource.url=jdbc:postgresql://postgres:5432/chatapplication' > config/application.properties    
 
       - name: Build with Gradle
         working-directory: ./whatsApp
         run: ./gradlew build
 
-      - name: Update dependency graph
-        uses: snyk/actions/gradle@v8.5
-        with:
-          target-file: ./whatsApp/build.gradle 
+       
 
       - name: Build Jar file
         working-directory: ./whatsApp
