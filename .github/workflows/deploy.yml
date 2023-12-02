@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: demo-0.0.1-SNAPSHOT
-          path: ./whatsApp/build/libs/demo-0.0.1-SNAPSHOT.jar        
+          path: ./whatsApp/build/libs/whatsApp-0.0.1-SNAPSHOT.jar        
 
       
 
