@@ -54,11 +54,9 @@ jobs:
         working-directory: ./whatsApp
         run: ./gradlew build
 
-       
-
       - name: Build Jar file
         working-directory: ./whatsApp
-        run:  ./project-dev build-jar 
+        run: build-jar 
       
       - name: Set Permissions for JAR file
         working-directory: ./whatsApp/build/libs
