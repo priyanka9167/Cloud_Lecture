@@ -39,7 +39,7 @@ jobs:
         run: |
           echo "SELECT usename FROM pg_user;" | psql -h localhost -U priyanka -d chatapplication
         env:
-          PGPASSWORD: priyank9167
+          PGPASSWORD: priyanka9167
 
       - name: Setup config
         working-directory: ./whatsApp
@@ -47,7 +47,7 @@ jobs:
           mkdir config
           echo 'spring.datasource.url=jdbc:postgresql://localhost:5432/chatapplication' > config/application.properties
           echo 'spring.datasource.username=priyanka' >> config/application.properties
-          echo 'spring.datasource.password=your_password' >> config/application.properties
+          echo 'spring.datasource.password=priyanka9167' >> config/application.properties
 
 
       - name: Build with Gradle
