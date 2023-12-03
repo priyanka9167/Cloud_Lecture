@@ -11,9 +11,10 @@ jobs:
         image: postgres:latest
 
         env:
-          POSTGRES_DB: ${{ secrets.DATABASE }}
-          POSTGRES_PASSWORD: ${{ secrets.PD }}
-          POSTGRES_ROOT_HOST: ${{ secrets.ROOT_HOST }}
+          POSTGRES_DB: chatapplication
+          POSTGRES_PASSWORD: priyanka9167
+          POSTGRES_USER: priyanka
+
         ports:
           - 5432:5432
         options: >-
@@ -23,37 +24,51 @@ jobs:
           --health-retries 5
 
     steps:
+
+
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
-          distribution: 'adopt'
-      - name: Print Current Directory before cd
-        run: pwd
-      - name: Change directory to project
-        run: cd whatsApp
+          java-version: '17'
+          distribution: 'temurin'
 
-      - name: Print Current Directory
-        run: pwd
+      - name: List PostgreSQL Users
+        run: |
+          echo "SELECT usename FROM pg_user;" | psql -h localhost -U priyanka -d chatapplication
+        env:
+          PGPASSWORD: priyanka9167
 
-      - name: Set execute permissions for Gradle wrapper
-        run: chmod +x ./gradlew
+      - name: Setup config
+        working-directory: ./whatsApp
+        run: |
+          mkdir config
+          echo 'spring.datasource.url=jdbc:postgresql://localhost:5432/chatapplication' > config/application.properties
+          echo 'spring.datasource.username=priyanka' >> config/application.properties
+          echo 'spring.datasource.password=priyanka9167' >> config/application.properties
+
 
       - name: Build with Gradle
+        working-directory: ./whatsApp
         run: ./gradlew build
 
+      - name: Run Tests
+        working-directory: ./whatsApp
+        run: ./gradlew test
 
 
-      - name: create and configure
-        run: |
-          touch .env
-          echo "db_port=${{ secrets.PORT }}" >> .env
-          echo "db_username=${{ secrets.USER }}" >> .env
-          echo "db_password=${{ secrets.PD }}" >> .env
-          echo "db_name"=${{ secrets.DATABASE }} >> .env
+
+      - name: Save Jar file
+        uses: actions/upload-artifact@v3
+        with:
+          name: demo-0.0.1-SNAPSHOT
+          path: ./whatsApp/build/libs/whatsApp-0.0.1-SNAPSHOT.jar
+
+
+
+
 
           
 
