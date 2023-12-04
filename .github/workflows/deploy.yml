@@ -13,9 +13,9 @@ jobs:
         image: postgres:latest
 
         env:
-          POSTGRES_DB: chatapplication
-          POSTGRES_PASSWORD: priyanka9167
-          POSTGRES_USER: priyanka
+          POSTGRES_DB: ${{ secrets.DATABASE }}
+          POSTGRES_PASSWORD: ${{ secrets.PD }}
+          POSTGRES_USER: ${{ secrets.USER }}
 
         ports:
           - 5432:5432
@@ -39,17 +39,17 @@ jobs:
 
       - name: List PostgreSQL Users
         run: |
-          echo "SELECT usename FROM pg_user;" | psql -h localhost -U priyanka -d chatapplication
+          echo "SELECT usename FROM pg_user;" | psql -h localhost -U priyanka -d ${{ secrets.DATABASE }}
         env:
-          PGPASSWORD: priyanka9167
+          PGPASSWORD: ${{ secrets.PD }}
 
       - name: Setup config
         working-directory: ./whatsApp
         run: |
           mkdir config
-          echo 'spring.datasource.url=jdbc:postgresql://localhost:5432/chatapplication' > config/application.properties
-          echo 'spring.datasource.username=priyanka' >> config/application.properties
-          echo 'spring.datasource.password=priyanka9167' >> config/application.properties
+          echo 'spring.datasource.url=jdbc:postgresql://localhost:5432/{{ secrets.DATABASE }}' > config/application.properties
+          echo 'spring.datasource.username=${{ secrets.USER }}' >> config/application.properties
+          echo 'spring.datasource.password=${{ secrets.PD }}' >> config/application.properties
 
 
       - name: Build with Gradle
