@@ -47,7 +47,7 @@ jobs:
         working-directory: ./whatsApp
         run: |
           mkdir config
-          echo 'spring.datasource.url=jdbc:postgresql://localhost:5432/{{ secrets.DATABASE }}' > config/application.properties
+          echo 'spring.datasource.url=jdbc:postgresql://localhost:5432/${{ secrets.DATABASE }}' > config/application.properties
           echo 'spring.datasource.username=${{ secrets.USER }}' >> config/application.properties
           echo 'spring.datasource.password=${{ secrets.PD }}' >> config/application.properties
 
