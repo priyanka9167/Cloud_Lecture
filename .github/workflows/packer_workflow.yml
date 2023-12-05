@@ -36,7 +36,7 @@ jobs:
       - name: zip all files
         working-directory: ./whatsApp
         run: zip -r whatsApp.zip .
-        echo "Zip folder destination: $PWD/whatsApp.zip"
+        echo: "Zip folder destination $PWD/whatsApp.zip"
 
       - name: Install Packer
         run: |
