@@ -96,17 +96,17 @@ variable "script" {
 
 variable "USER" {
   type    = string
-  default = "priyanka"
+  default = "${env("USER")}"
 }
 
 variable "DATABASE" {
   type    = string
-  default = "chatapplication"
+  default = "${env("DATABASE")}"
 }
 
 variable "PD" {
   type    = string
-  default = "priyanka9167"
+  default = "${env("PD")}"
 }
 
 locals {

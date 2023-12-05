@@ -2,6 +2,8 @@ name: "Integration test (POSTGRES)"
 
 on:
   push:
+    branches:
+      - testing
 jobs:
   connect-remote:
     runs-on: ubuntu-latest
@@ -11,10 +13,9 @@ jobs:
         image: postgres:latest
 
         env:
-          POSTGRES_DB: chatapplication
-          POSTGRES_PASSWORD: priyanka9167
-          POSTGRES_USER: priyanka
-          
+          POSTGRES_DB: ${{ secrets.DATABASE }}
+          POSTGRES_PASSWORD: ${{ secrets.PD }}
+          POSTGRES_USER: ${{ secrets.USER }}
         ports:
           - 5432:5432
         options: >-
@@ -24,8 +25,6 @@ jobs:
           --health-retries 5
 
     steps:
-     
-
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -34,35 +33,37 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      
+
       - name: List PostgreSQL Users
         run: |
-          echo "SELECT usename FROM pg_user;" | psql -h localhost -U priyanka -d chatapplication
+          echo "SELECT usename FROM pg_user;" | psql -h localhost -U priyanka -d ${{ secrets.DATABASE }}
         env:
-          PGPASSWORD: priyanka9167
+          PGPASSWORD: ${{ secrets.PD }}
+
 
       - name: Setup config
         working-directory: ./whatsApp
         run: |
           mkdir config
-          echo 'spring.datasource.url=jdbc:postgresql://localhost:5432/chatapplication' > config/application.properties
-          echo 'spring.datasource.username=priyanka' >> config/application.properties
-          echo 'spring.datasource.password=priyanka9167' >> config/application.properties
-
-
+          echo 'spring.datasource.url=jdbc:postgresql://localhost:5432/${{ secrets.DATABASE }}' > config/application.properties
+          echo 'spring.datasource.username=${{ secrets.USER }}' >> config/application.properties
+          echo 'spring.datasource.password=${{ secrets.PD }}' >> config/application.properties
+       
       - name: Build with Gradle
         working-directory: ./whatsApp
         run: ./gradlew build
 
-       
+      - name: Run Tests
+        working-directory: ./whatsApp
+        run: ./gradlew test
 
       - name: Save Jar file
         uses: actions/upload-artifact@v3
         with:
           name: demo-0.0.1-SNAPSHOT
-          path: ./whatsApp/build/libs/whatsApp-0.0.1-SNAPSHOT.jar        
+          path: ./whatsApp/build/libs/whatsApp-0.0.1-SNAPSHOT.jar
 
-      
+    
 
           
 
