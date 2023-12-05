@@ -1,0 +1,57 @@
+name: AMI format test
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+
+jobs:
+  connect-remote:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create and Configure
+        working-directory: ./whatsApp
+        run: |
+          touch .env
+          echo USER=${{ secrets.USER }}
+          echo DATABASE=${{ secrets.DATABASE }}
+          echo PD = ${{ secrets.PD }}
+
+      - name: Setup config
+        working-directory: ./whatsApp
+        run: |
+            mkdir config
+            echo 'spring.datasource.url=jdbc:postgresql://localhost:5432/${{ secrets.DATABASE }}' > config/application.properties
+            echo 'spring.datasource.username=${{ secrets.USER }}' >> config/application.properties
+            echo 'spring.datasource.password=${{ secrets.PD }}' >> config/application.properties
+          
+      
+
+      - name: zip all files
+        working-directory: ./whatsApp
+        run: zip -r whatsApp.zip .
+
+      - name: Install Packer
+        run: |
+            wget https://releases.hashicorp.com/packer/1.7.2/packer_1.7.2_linux_amd64.zip
+            unzip packer_1.7.2_linux_amd64.zip
+            chmod +x packer
+            sudo mv packer /usr/local/bin/
+            packer version
+
+      - name: Run Packer pulgin installation
+        run: packer init .
+
+      - name: Run Packer fmt
+        run: packer fmt -check .
+
+      - name: Run Packer validate
+        working-directory: ./whatsApp/packer-vm
+        run: packer validate -var-file="variables.pkvars.hcl" -var 'USER=${{ secrets.USER }}' -var 'DATABASE=${{ secrets.DATABASE }}' -var 'PD=${{ secrets.PD }}' vm.pkr.hcl
+
