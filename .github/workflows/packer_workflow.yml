@@ -46,9 +46,11 @@ jobs:
             packer version
 
       - name: Run Packer pulgin installation
+        working-directory: ./whatsApp/packer-vm
         run: packer init .
 
       - name: Run Packer fmt
+        working-directory: ./whatsApp/packer-vm
         run: packer fmt -check .
 
       - name: Run Packer validate
