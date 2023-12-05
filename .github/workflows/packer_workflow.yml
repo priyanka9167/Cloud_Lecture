@@ -38,7 +38,16 @@ jobs:
         run: zip -r whatsApp.zip .
 
       - name: echo destination path
-        run:  echo "${{ github.workspace }}/whatsApp.zip"
+        working-directory: ./whatsApp
+        run:  ls
+
+      - name: echo whatapp destination path
+        working-directory: ./whatsApp
+        run: ls -R
+
+      - name: echo packer destination path
+        working-directory: ./whatsApp/packer-vm
+        run: ls
 
       - name: Install Packer
         run: |
