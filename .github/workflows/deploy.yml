@@ -16,7 +16,6 @@ jobs:
           POSTGRES_DB: ${{ secrets.DATABASE }}
           POSTGRES_PASSWORD: ${{ secrets.PD }}
           POSTGRES_USER: ${{ secrets.USER }}
-
         ports:
           - 5432:5432
         options: >-
@@ -26,8 +25,6 @@ jobs:
           --health-retries 5
 
     steps:
-
-
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -43,6 +40,7 @@ jobs:
         env:
           PGPASSWORD: ${{ secrets.PD }}
 
+
       - name: Setup config
         working-directory: ./whatsApp
         run: |
@@ -50,8 +48,7 @@ jobs:
           echo 'spring.datasource.url=jdbc:postgresql://localhost:5432/${{ secrets.DATABASE }}' > config/application.properties
           echo 'spring.datasource.username=${{ secrets.USER }}' >> config/application.properties
           echo 'spring.datasource.password=${{ secrets.PD }}' >> config/application.properties
-
-
+       
       - name: Build with Gradle
         working-directory: ./whatsApp
         run: ./gradlew build
@@ -60,17 +57,13 @@ jobs:
         working-directory: ./whatsApp
         run: ./gradlew test
 
-
-
       - name: Save Jar file
         uses: actions/upload-artifact@v3
         with:
           name: demo-0.0.1-SNAPSHOT
           path: ./whatsApp/build/libs/whatsApp-0.0.1-SNAPSHOT.jar
 
-
-
-
+    
 
           
 
