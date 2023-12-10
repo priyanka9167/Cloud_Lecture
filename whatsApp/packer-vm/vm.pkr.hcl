@@ -141,11 +141,6 @@ build {
 
   provisioner "shell" {
     script = "${var.script}"
-    environment_vars = [
-      "PD=${var.PD}",
-      "DATABASE=${var.DATABASE}",
-      "USER=${var.USER}"
-    ]
   }
 }
 
