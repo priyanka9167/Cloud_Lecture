@@ -15,7 +15,7 @@ device_name = "/dev/xvda"
 volume_size = 25
 volume_type = "gp2"
 
-provisioner_webapp_source = "./whatsApp.zip"
+provisioner_webapp_source = "whatsApp.zip"
 provisioner_webapp_destination = "/home/admin/whatsApp.zip"
 script  = "./setup.sh"
 
