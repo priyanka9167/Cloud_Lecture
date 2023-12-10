@@ -66,6 +66,6 @@ jobs:
         run: packer fmt -check .
 
       - name: Run Packer validate
-        working-directory: ./whatsApp/packer-vm
-        run: packer validate -var-file="variables.pkvars.hcl" -var 'USER=${{ secrets.USER }}' -var 'DATABASE=${{ secrets.DATABASE }}' -var 'PD=${{ secrets.PD }}' vm.pkr.hcl
+        working-directory: ./whatsApp
+        run: packer validate -var-file="./packer-vm/variables.pkvars.hcl"  ./packer-vm/vm.pkr.hcl
 
