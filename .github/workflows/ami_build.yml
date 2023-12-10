@@ -1,0 +1,46 @@
+name: AMI build
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  connect-remote:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout-code
+        uses: actions/checkout@v2
+
+      - name: zip all files
+        working-directory: ./whatsApp
+        run: zip -r whatsApp.zip
+
+      - name: Install Packer
+        run: |
+          wget  https://releases.hashicorp.com/packer/1.7.2/packer_1.7.2_linux_amd64.zip
+          unzip -o packer_1.7.2_linux_amd64.zip -d /tmp
+          chmod +x /tmp/packer
+          sudo mv /tmp/packer /usr/local/bin/
+          packer version
+
+      - name: Configure AWS configure
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secret.AWS_REGION }}
+
+      - name: Run Packer pulgin installation
+        working-directory: ./whatsApp/packer-vm
+        run: packer init .
+
+      - name: Run Packer file
+        working-directory: ./whatsApp/packer-vm
+        run: packer build -var-file="variables.pkvars.hcl" vm.pkr.hcl
+
+
+          
+
+
+
