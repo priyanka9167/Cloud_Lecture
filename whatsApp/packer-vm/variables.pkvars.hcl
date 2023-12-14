@@ -4,7 +4,6 @@ ssh_username = "admin"
 ami_name = "Debain-12"
 date_format = "YYYY_MM_DD_hh_mm_ss"
 aws_region = "us-east-1"
-ami_users = ""
 dev_account_id = "485788354807"
 ami_regions = ["us-east-1", "us-west-1"]
 instance_type = "t2.micro"
