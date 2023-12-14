@@ -31,6 +31,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Run Packer fmt
+        working-directory: ./whatsApp/packer-vm
+        run: packer fmt -check .
+
       - name: Run Packer pulgin installation
         working-directory: ./whatsApp/packer-vm
         run: packer init .
