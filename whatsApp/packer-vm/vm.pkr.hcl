@@ -39,7 +39,7 @@ variable "instance_type" {
 
 variable "source_ami" {
   type    = string
-  default = "ami-058bd2d568351da34"
+  default = "ami-0ec3d9efceafb89e0"
 }
 
 variable "ssh_username" {
@@ -86,7 +86,7 @@ variable "provisioner_webapp_destination" {
 
 variable "aws_region" {
   type    = string
-  default = "us-east-1"
+  default = "us-east-2"
 }
 
 variable "script" {
